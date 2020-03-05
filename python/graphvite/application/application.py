@@ -472,7 +472,6 @@ def linear_classification(args):
         return torch.as_tensor(new_indexes), torch.as_tensor(new_labels)
 
     embeddings, labels, portion, normalization, times, patience, gpu = args
-    embeddings = np.asarray(embeddings)
     num_sample, num_class = labels.shape
     num_train = int(num_sample * portion)
 
@@ -1000,8 +999,6 @@ def triplet_prediction(args):
 
     entity_embeddings, relation_embeddings, H, R, T, \
     exclude_H, exclude_T, target, k, score_function, margin, device = args
-    entity_embeddings = np.asarray(entity_embeddings)
-    relation_embeddings = np.asarray(relation_embeddings)
     num_entity = len(entity_embeddings)
     score_function = LinkPredictor(score_function, entity_embeddings, relation_embeddings, entity_embeddings,
                                    margin=margin)

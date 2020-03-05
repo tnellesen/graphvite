@@ -152,6 +152,8 @@ def run_main(args):
         app.set_format(**cfg.format)
     app.load(**cfg.graph)
     app.build(**cfg.build)
+    if "load" in cfg:
+        app.load_model(**cfg.load)
     app.train(**cfg.train)
     if args.eval and "evaluate" in cfg:
         if isinstance(cfg.evaluate, dict):
