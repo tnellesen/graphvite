@@ -665,8 +665,15 @@ public:
                     edge_edge_weights.push_back(w / p);
                 else if (neighbors[x].find(u) == neighbors[x].end())
                     edge_edge_weights.push_back(w / q);
-                else
-                    edge_edge_weights.push_back(w);
+                else {
+                    Float w2 = 0;
+                    for (auto &&edge2 : graph->vertex_edges[u]) {
+                        Index x2 = std::get<0>(edge2);
+                        if (x == x2) 
+                            w2 = std::get<1>(edge2);
+                    }
+                    edge_edge_weights.push_back(w * (1-w2)/q);
+                }
             }
             if (!edge_edge_weights.empty())
                 edge_edge_tables[i].build(edge_edge_weights);
