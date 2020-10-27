@@ -100,8 +100,7 @@ def load_config(config_file):
     if "optimizer" in cfg.build:
         cfg.build.optimizer = gv.optimizer.Optimizer(**cfg.build.optimizer)
     if "vectors" in cfg.graph:
-        if cfg.graph.vectors.endswith(".npy"):
-            import numpy as np
+        if isinstance(cfg.graph.vectors, str) and cfg.graph.vectors.endswith(".npy"):
             cfg.graph.vectors = np.load(cfg.graph.vectors)
 
     return cfg
